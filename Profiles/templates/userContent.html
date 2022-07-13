@@ -1,0 +1,54 @@
+{% extends "homepage.html" %}
+{% block content %}
+
+<div class="d-flex justify-content-start my-3">
+    <h4>Welcome <i>{{username}}</i> to Authentication Control Panel </h4>
+    {% if is_superuser %}
+
+    <h5><span class="badge text-bg-success my-1 mx-2">Superuser</span></h5>
+    {% else %}
+    <h5><span class="badge text-bg-primary my-1 mx-2">User</span></h5>
+    {% endif %}
+</div>
+
+<br><br>
+<div class="row">
+    <div class="col">
+        <!-- <h6>Customer Details</h6> -->
+        <h3 class="text-secondary ">Customer Details</h3 ><br>
+        <div class="scrollable">
+            <ul class="list-group">
+                {% for customer in customers %}
+                <a href="{% url 'customer' customer.id %}">
+                    <li class="list-group-item">{{customer}}</li>
+                </a>
+                {% endfor %}
+            </ul>
+        </div>
+
+        {% if is_superuser %}
+        <a class="btn btn-secondary my-3" href="{% url 'createCustomer' %}" role="button">Add Customer</a>
+        {% endif %}
+    </div>
+    {% if is_superuser %}
+    <div class="col">
+        <!-- <h6>User Details</h6> -->
+        <h3 class="text-secondary">User Details</h3 ><br>
+        <!-- <br> -->
+        <div class="scrollable">
+            <ul class="list-group">
+                {% for user in users %}
+                <a href="{% url 'user' user.id %}">
+                    <li class="list-group-item">{{user}}</li>
+                </a>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <a class="btn btn-secondary my-3" href="{% url 'createUser' %}" role="button">Add User</a>
+    </div>
+    {% endif %}
+</div>
+</div>
+
+{% endblock content %}

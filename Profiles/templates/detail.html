@@ -1,0 +1,16 @@
+{% extends "homepage.html" %}
+
+{% block content %}
+
+<div class="container">
+    {% if userType == 'User' %}
+    {{data.username}}
+    {{data.email}}
+    {% else %}
+    {{data.name}}
+    {{data.number}}
+    {{data.address}}
+    {% endif %}
+</div>
+
+{% endblock content %}
